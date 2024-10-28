@@ -19,6 +19,7 @@ export const Main = styled.main`
 display: flex;
 width: 100%;
 gap: 0.75rem;
+padding: 0 1.5rem 1.5rem 1.5rem;
 `
 
 export const Section = styled.section`
