@@ -1,7 +1,9 @@
+import { Home } from "./screens/home";
+
 export function App() {
   return (
     <>
-      <h1>Ola</h1>
+      <Home />
     </>
   )
 }
