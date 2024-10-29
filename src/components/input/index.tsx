@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import { ComponentProps, forwardRef } from "react";
 import { Container } from "./styles";
 
 type InputProps = ComponentProps<'input'> & {
@@ -6,11 +6,11 @@ type InputProps = ComponentProps<'input'> & {
     variant?: 'black' | 'dark'
 }
 
-export function Input({ label, variant = 'black', ...props }: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function ({ label, variant = 'black', ...props }, ref) {
     return (
         <Container $variant={variant}>
             {label && <label>{label}</label>}
-            <input{...props} />
+            <input ref={ref}{...props} />
         </Container>
     )
-}
+})
