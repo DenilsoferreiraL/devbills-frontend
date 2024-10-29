@@ -34,4 +34,13 @@ display: flex;
 width: 100%;
 align-items: center;
 justify-content: space-between;
+
 `
+export const InputGroup = styled.div`
+display: flex;
+width: 100%;
+align-items: flex-end;
+max-width: 22.5rem;
+gap: 0.5rem;
+`
+

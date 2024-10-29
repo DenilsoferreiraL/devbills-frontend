@@ -2,7 +2,7 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section } from "./styles";
+import { Filters, Header, Main, Section, InputGroup } from "./styles";
 
 
 export function Home() {
@@ -19,10 +19,10 @@ export function Home() {
                 <Section>
                     <Filters>
                         <Title title="Saldo" subtitle="Receitas e despesas no período" />
-                        <div>
+                        <InputGroup>
                             <Input variant="dark" label="Início" placeholder="dd/mm/aaaa" />
                             <Input variant="dark" label="Fim" placeholder="dd/mm/aaaa" />
-                        </div>
+                        </InputGroup>
                     </Filters>
                 </Section>
             </Main>
