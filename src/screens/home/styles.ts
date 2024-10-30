@@ -52,12 +52,25 @@ gap: 0.75rem;
 `
 export const ChartContainer = styled.div`
 display: flex;
-width: 100%;
 padding: 1rem;
+flex-direction: column;
 background-color: ${theme.colors.dark};
 border-radius: 0.25rem;
 gap: 0.75rem;
+
+header{ 
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
 `
 export const ChartContent = styled.div`
 height: 14.5rem;
+`
+
+export const ChartAction = styled.div`
+display: flex;
+align-items: flex-end;
+width: 8rem;
+gap: 0.5rem;
 `
