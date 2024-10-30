@@ -43,6 +43,9 @@ export function Home() {
                         </InputGroup>
                     </Filters>
                     <Balance>
+                        <Card title="Saldo" amount={1000000} />
+                        <Card title="Receitas" amount={1000000} variant="incomes" />
+                        <Card title="Gastos" amount={1000000} variant="expenses" />
                     </Balance>
                 </Section>
             </Main>
