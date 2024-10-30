@@ -3,8 +3,9 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section, InputGroup } from "./styles";
+import { Filters, Header, Main, Section, InputGroup, Balance } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
+import { Card } from "../../components/card";
 
 
 export function Home() {
@@ -41,6 +42,8 @@ export function Home() {
                             <ButtonIcon />
                         </InputGroup>
                     </Filters>
+                    <Balance>
+                    </Balance>
                 </Section>
             </Main>
         </>

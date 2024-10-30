@@ -43,4 +43,10 @@ align-items: flex-end;
 max-width: 22.5rem;
 gap: 0.5rem;
 `
+export const Balance = styled.div`
+display: flex;
+width: 100%;
+align-items: center;
+gap: 0.75rem;
+`
 
