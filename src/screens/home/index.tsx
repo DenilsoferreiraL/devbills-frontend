@@ -25,19 +25,19 @@ export function Home() {
                         <InputGroup>
                             <InputMask
                                 component={Input}
-                                mask='dd/mm/yyyy'
-                                replacement={{ d: /\d/, m: /\m/, y: /\y/ }}
+                                mask='dd/mm/aaaa'
+                                replacement={{ d: /\d/, m: /\d/, a: /\d/ }}
                                 variant="dark"
                                 label="Início"
-                                placeholder="dd/mm/yyyy"
+                                placeholder="dd/mm/aaaa"
                             />
                             <InputMask
                                 component={Input}
-                                mask='dd/mm/yyyy'
-                                replacement={{ d: /\d/, m: /\m/, y: /\y/ }}
+                                mask='dd/mm/aaaa'
+                                replacement={{ d: /\d/, m: /\d/, a: /\d/ }}
                                 variant="dark"
                                 label="Fim"
-                                placeholder="dd/mm/yyyy"
+                                placeholder="dd/mm/aaaa"
                             />
                             <ButtonIcon />
                         </InputGroup>
@@ -58,6 +58,17 @@ export function Home() {
                     <ChartContainer>
                         <header>
                             <Title title="Evolução Financeira" subtitle="Saldo, Receitas e Gastos no ano" />
+                            <div>
+                                <InputMask
+                                    component={Input}
+                                    mask='aaaa'
+                                    replacement={{ a: /\d/ }}
+                                    variant="black"
+                                    label="Ano"
+                                    placeholder="aaaa"
+                                />
+                                <ButtonIcon />
+                            </div>
                             <ChartContent>
 
                             </ChartContent>
