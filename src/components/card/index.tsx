@@ -1,4 +1,4 @@
-import { CurrencyCircleDollar } from "@phosphor-icons/react";
+import { ArrowCircleDownRight, ArrowCircleUpRight, CurrencyCircleDollar } from "@phosphor-icons/react";
 import { Container } from "./styles";
 
 type CardProps = {
@@ -7,10 +7,16 @@ type CardProps = {
     amount: number
 }
 
+const iconsMap = {
+    balance: <CurrencyCircleDollar />,
+    incomes: <ArrowCircleUpRight />,
+    expenses: <ArrowCircleDownRight />,
+}
+
 export function Card({ variant = 'balance', amount, title }: CardProps) {
     return (
         <Container $variant={variant}>
-            <CurrencyCircleDollar />
+            {iconsMap[variant]}
             <span>{title}</span>
             <strong>{amount}</strong>
         </Container>
