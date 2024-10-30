@@ -13,7 +13,7 @@ gap: 0.375rem;
 }
 >span{
     font-size: 0.875rem;
-    color: ${theme.colors.white};
+    color: ${theme.colors.neutral};
     font-weight: 400;
 }
 `

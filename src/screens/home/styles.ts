@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { theme } from '../../styles/theme'
 
 export const Header = styled.header`
 display: flex;
@@ -49,4 +50,14 @@ width: 100%;
 align-items: center;
 gap: 0.75rem;
 `
-
+export const ChartContainer = styled.div`
+display: flex;
+width: 100%;
+padding: 1rem;
+background-color: ${theme.colors.dark};
+border-radius: 0.25rem;
+gap: 0.75rem;
+`
+export const ChartContent = styled.div`
+height: 14.5rem;
+`

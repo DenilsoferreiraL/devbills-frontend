@@ -3,7 +3,7 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section, InputGroup, Balance } from "./styles";
+import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 
@@ -47,6 +47,22 @@ export function Home() {
                         <Card title="Receitas" amount={1000000} variant="incomes" />
                         <Card title="Gastos" amount={1000000} variant="expenses" />
                     </Balance>
+                    <ChartContainer>
+                        <header>
+                            <Title title="Gastos" subtitle="Despesas por categoria no período" />
+                            <ChartContent>
+
+                            </ChartContent>
+                        </header>
+                    </ChartContainer>
+                    <ChartContainer>
+                        <header>
+                            <Title title="Evolução Financeira" subtitle="Saldo, Receitas e Gastos no ano" />
+                            <ChartContent>
+
+                            </ChartContent>
+                        </header>
+                    </ChartContainer>
                 </Section>
             </Main>
         </>
