@@ -1,12 +1,18 @@
 import { CurrencyCircleDollar } from "@phosphor-icons/react";
 import { Container } from "./styles";
 
-export function Card() {
+type CardProps = {
+    variant?: 'balance' | 'incomes' | 'expenses',
+    title: string
+    amount: number
+}
+
+export function Card({ variant = 'balance', amount, title }: CardProps) {
     return (
-        <Container>
-            <CurrencyCircleDollar/>
-            <span>Saldo</span>
-            <strong>R$ 00,00</strong>
+        <Container $variant={variant}>
+            <CurrencyCircleDollar />
+            <span>{title}</span>
+            <strong>{amount}</strong>
         </Container>
     )
 }
