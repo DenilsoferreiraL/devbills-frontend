@@ -7,6 +7,7 @@ import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, Ch
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 import { Transaction } from "../../components/transaction";
+import { Dialog } from "../../components/dialog";
 
 
 export function Home() {
@@ -15,7 +16,7 @@ export function Home() {
             <Header>
                 <Logo />
                 <div>
-                    <Button variant="default">Nova transação</Button>
+                    <Dialog trigger={<Button>Nova transação</Button>}>Olá</Dialog>
                     <Button variant="default">Nova categoria</Button>
                 </div>
             </Header>
