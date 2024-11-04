@@ -3,7 +3,7 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside } from "./styles";
+import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SerachTransaction } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 
@@ -75,6 +75,13 @@ export function Home() {
                 <Aside>
                     <header>
                         <Title title="Transações" subtitle="Receitas e gastos no período" />
+                        <SerachTransaction>
+                            <Input
+                                variant="black"
+                                placeholder="Procurar transações"
+                            />
+                            <ButtonIcon />
+                        </SerachTransaction>
                     </header>
                 </Aside>
             </Main>
