@@ -74,3 +74,13 @@ align-items: flex-end;
 width: 8rem;
 gap: 0.5rem;
 `
+
+export const Aside = styled.aside`
+min-width: 22.5rem;
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+padding: 1rem;
+border-radius: 0.25rem;
+background-color: ${theme.colors.dark};
+`
