@@ -6,6 +6,7 @@ import { Title } from "../../components/title";
 import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SerachTransaction } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
+import { Transaction } from "../../components/transaction";
 
 
 export function Home() {
@@ -82,6 +83,7 @@ export function Home() {
                             />
                             <ButtonIcon />
                         </SerachTransaction>
+                        <Transaction />
                     </header>
                 </Aside>
             </Main>
