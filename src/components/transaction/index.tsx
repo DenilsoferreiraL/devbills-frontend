@@ -1,20 +1,33 @@
 import { FormatCurrency } from "../../utils/format-currency";
 import { Container, Info, Content } from "./styles";
 
-export function Transaction() {
+
+type TranasctionProps = {
+    id: number
+    title: string
+    date: string
+    amount: number
+    category: {
+        title: string
+        color: string
+    }
+    variant?: 'income' | 'expense'
+}
+
+export function Transaction({ id, title, date, amount, category, variant = 'income' }: TranasctionProps) {
     return (
         <Container>
             <Info>
-                <span>#000</span>
+                <span>#{id.toString().padStart(4, '0')}</span>
                 <div>
-                    <strong>Mercado</strong>
-                    <span>18/01/2000</span>
+                    <strong>{title}</strong>
+                    <span>{date}</span>
                 </div>
             </Info>
 
-            <Content>
-                <strong>{FormatCurrency(10000)}</strong>
-                <span>ALIMENTAÇÃO</span>
+            <Content $variant={variant} $tagColor={category.color}>
+                <strong>{FormatCurrency(amount)}</strong>
+                <span>{category.title.toUpperCase()}</span>
             </Content>
         </Container>
     )

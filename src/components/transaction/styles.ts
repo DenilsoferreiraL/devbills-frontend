@@ -1,6 +1,16 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+type ContentType = {
+    $variant: 'income' | 'expense'
+    $tagColor: string
+}
+
+const variantColorMap = {
+    income: theme.colors.success,
+    expense: theme.colors.error
+}
+
 export const Container = styled.div`
 display: flex;
 align-items: flex-start;
@@ -52,7 +62,7 @@ span{
 
 `
 
-export const Content = styled.div`
+export const Content = styled.div<ContentType>`
 display: flex;
 flex-direction: column;
 align-items: flex-end;
@@ -61,15 +71,15 @@ gap: 0.25rem;
 strong{
     font-size: 0.875rem;
     font-weight: 700;
-    color: ${theme.colors.info};
+    color: ${(props) => variantColorMap[props.$variant]};
 }
 
 span{
     font-size: 0.625rem;
     font-weight: 400;
-    border: 1px solid ${theme.colors.warning};
+    border: 1px solid  ${(props) => props.$tagColor};
     border-radius: 0.125rem;
-    color: ${theme.colors.warning};
+    color: ${(props) => props.$tagColor};
     padding: 0.25rem;
 }
 `

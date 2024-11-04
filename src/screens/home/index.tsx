@@ -83,7 +83,7 @@ export function Home() {
                             />
                             <ButtonIcon />
                         </SerachTransaction>
-                        <Transaction />
+                        <Transaction id={1} amount={20000} date='09/09/2023' category={{ title: 'Alimentação', color: '#ff33bb' }} title='Mercado' />
                     </header>
                 </Aside>
             </Main>
