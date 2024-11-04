@@ -3,7 +3,7 @@ import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SerachTransaction } from "./styles";
+import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SerachTransaction, TransactionGroup } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 import { Transaction } from "../../components/transaction";
@@ -83,8 +83,10 @@ export function Home() {
                             />
                             <ButtonIcon />
                         </SerachTransaction>
-                        <Transaction id={1} amount={20000} date='09/09/2023' category={{ title: 'Alimentação', color: '#ff33bb' }} title='Mercado' />
                     </header>
+                    <TransactionGroup>
+                        <Transaction id={1} amount={20000} date='09/09/2023' category={{ title: 'Alimentação', color: '#ff33bb' }} title='Mercado' />
+                    </TransactionGroup>
                 </Aside>
             </Main>
         </>
