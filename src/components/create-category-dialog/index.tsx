@@ -19,7 +19,7 @@ export function CreateCategoryDialog() {
     return (
         <Dialog open={open} onOpenChange={setOpen} trigger={<Button>Nova categoria</Button>}>
             <Container>
-                <Title title='Nova Transação' subtitle='Crie uma nova transação para seu controle financeiro' />
+                <Title title='Nova Transação' subtitle='Crie uma nova categoria para suas transações' />
                 <form>
                     <div>
                         <Input label="Nome" placeholder="Nome da categoria..." />
