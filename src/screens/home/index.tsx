@@ -7,7 +7,7 @@ import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, Ch
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 import { Transaction } from "../../components/transaction";
-import { Dialog } from "../../components/dialog";
+import { CreateCategoryDialog } from "../../components/create-category-dialog";
 
 
 export function Home() {
@@ -16,8 +16,8 @@ export function Home() {
             <Header>
                 <Logo />
                 <div>
-                    <Dialog trigger={<Button>Nova transação</Button>}>Olá</Dialog>
-                    <Button variant="default">Nova categoria</Button>
+                    <Button>Nova transação</Button>
+                    <CreateCategoryDialog />
                 </div>
             </Header>
             <Main>
