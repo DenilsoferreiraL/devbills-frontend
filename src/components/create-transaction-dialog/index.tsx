@@ -1,4 +1,4 @@
-import { Container, InputGroup } from "./styles";
+import { Container, CurrencyInput, InputGroup } from "./styles";
 import { Dialog } from "../dialog";
 import { useCallback, useState } from "react";
 import { Button } from "../button";
@@ -25,12 +25,10 @@ export function CreateTransactionDialog() {
                         <label htmlFor="">Categoria</label>
                         <select>
                             <option value="null">Selecione uma categoria</option>
-                            <option value="null">Selecione uma categoria</option>
-                            <option value="null">Selecione uma categoria</option>
                         </select>
                     </InputGroup>
                     <Input label="Nome" placeholder="Nome da Transação..." />
-                    <Input label="Valor" placeholder="R$ 0,00" />
+                    <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" />
                     <Input label="Data" placeholder="01/01/2023" />
 
                     <footer>

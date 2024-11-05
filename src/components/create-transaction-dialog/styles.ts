@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
+import { InputNumberFormat } from "@react-input/number-format";
 
 export const Container = styled.div`
 display: flex;
@@ -48,4 +49,25 @@ select{
        border-color: ${theme.colors.primary} ;
     }
 }
+`
+
+export const CurrencyInput = styled(InputNumberFormat)`
+width: 100%;
+height: 2.25rem;
+background-color: ${theme.colors.black};
+border: 0;
+border-radius: 0.25rem;
+padding: 0 0.75rem;
+color: ${theme.colors.neutral};
+font-size: 1rem;
+border: 1px solid transparent;
+transform: all 100ms;
+
+&::placeholder{
+    color: ${theme.colors.neutral};
+}
+
+&:focus{
+       border-color: ${theme.colors.primary} ;
+    }
 `
