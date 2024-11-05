@@ -21,6 +21,12 @@ footer{
 }
 `
 
+export const Content = styled.div`
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+`
+
 export const InputGroup = styled.div`
 display: flex;
 flex-direction: column;
@@ -70,4 +76,29 @@ transform: all 100ms;
 &:focus{
        border-color: ${theme.colors.primary} ;
     }
+`
+
+export const RadioForm = styled.div`
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+`
+
+export const RadioGroup = styled.div`
+display: flex;
+align-items:center ;
+gap: 0.5rem;
+
+input{
+    width: 1rem;
+    height: 1rem;
+    accent-color: ${theme.colors.primary};
+    cursor: pointer;
+}
+
+label{
+    color: ${theme.colors.white};
+    font-size: 0.875rem;
+    cursor: pointer;
+}
 `

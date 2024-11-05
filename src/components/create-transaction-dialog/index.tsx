@@ -1,9 +1,10 @@
-import { Container, CurrencyInput, InputGroup } from "./styles";
+import { Container, Content, CurrencyInput, InputGroup, RadioForm, RadioGroup } from "./styles";
 import { Dialog } from "../dialog";
 import { useCallback, useState } from "react";
 import { Button } from "../button";
 import { Title } from "../title";
 import { Input } from "../input";
+import { InputMask } from "@react-input/mask";
 
 export function CreateTransactionDialog() {
     const [open, setOpen] = useState(false)
@@ -21,16 +22,38 @@ export function CreateTransactionDialog() {
             <Container>
                 <Title title='Nova Transação' subtitle='Crie uma nova transação para seu controle financeiro' />
                 <form>
-                    <InputGroup>
-                        <label htmlFor="">Categoria</label>
-                        <select>
-                            <option value="null">Selecione uma categoria</option>
-                        </select>
-                    </InputGroup>
-                    <Input label="Nome" placeholder="Nome da Transação..." />
-                    <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" />
-                    <Input label="Data" placeholder="01/01/2023" />
+                    <Content>
+                        <InputGroup>
+                            <label >Categoria</label>
+                            <select>
+                                <option value="null">Selecione uma categoria</option>
+                            </select>
+                        </InputGroup>
+                        <Input label="Nome" placeholder="Nome da Transação..." />
+                        <InputGroup>
+                            <label>Valor</label>
+                            <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" />
+                        </InputGroup>
+                        <InputMask
+                            component={Input}
+                            mask='dd/mm/aaaa'
+                            replacement={{ d: /\d/, m: /\d/, a: /\d/ }}
+                            variant="black"
+                            label="Data"
+                            placeholder="dd/mm/aaaa"
+                        />
 
+                        <RadioForm>
+                            <RadioGroup>
+                                <input type="radio" id="income" value="income" name="type" />
+                                <label htmlFor="income"  >Receita</label>
+                            </RadioGroup>
+                            <RadioGroup>
+                                <input type="radio" id="expense" value="expense" name="type" />
+                                <label htmlFor="expense" >Gasto</label>
+                            </RadioGroup>
+                        </RadioForm>
+                    </Content>
                     <footer>
                         <Button onClick={handleClose} variant="outline" type="button">Cancelar</Button>
                         <Button onClick={onSubmit} type="button">Cadastrar</Button>
