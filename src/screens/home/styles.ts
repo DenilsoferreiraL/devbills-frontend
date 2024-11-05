@@ -62,10 +62,12 @@ header{
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-direction: column;
 }
 `
 export const ChartContent = styled.div`
-height: 14.5rem;
+height: 15rem;
+width: 100%
 `
 
 export const ChartAction = styled.div`
