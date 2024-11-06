@@ -1,5 +1,6 @@
 import { ResponsivePie } from "@nivo/pie";
 import { useMemo } from "react";
+import { theme } from "../../styles/theme";
 
 const apiData = [
     {
@@ -17,7 +18,7 @@ const apiData = [
     {
         _id: '3',
         title: 'Streaming',
-        amount: 70000,
+        amount: 10000,
         color: '#00ff00',
     },
 ];
@@ -43,7 +44,39 @@ export function CategoriesPieChart() {
     }, []);
 
     return (
-        <ResponsivePie data={data} />
+        <ResponsivePie data={data} enableArcLabels={false} enableArcLinkLabels={false} colors={({ data }) => data.color}
+            margin={{ top: 8 }} theme={{
+                text: {
+                    fontFamily: 'Lexend',
+                    fontSize: 10
+                },
+                tooltip: {
+                    container: {
+                        backgroundColor: theme.colors.black,
+                        padding: 16,
+                        color: theme.colors.white,
+                        fontSize: 12,
+                        borderRadius: 4
+                    }
+                }
+            }}
+            legends={[
+                {
+                    anchor: 'top',
+                    direction: 'row',
+                    justify: false,
+                    translateX: 0,
+                    translateY: -28,
+                    itemWidth: 120,
+                    itemHeight: 16,
+                    itemTextColor: theme.colors.neutral,
+                    itemDirection: 'left-to-right',
+                    itemOpacity: 1,
+                    symbolSize: 10,
+                    symbolShape: 'circle'
+                }
+            ]}
+        />
     )
 
 }

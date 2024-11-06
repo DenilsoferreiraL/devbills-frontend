@@ -62,7 +62,6 @@ header{
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    flex-direction: column;
 }
 `
 export const ChartContent = styled.div`

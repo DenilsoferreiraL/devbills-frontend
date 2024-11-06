@@ -51,7 +51,7 @@ export function Home() {
                         <Card title="Gastos" amount={1000000} variant="expenses" />
                     </Balance>
                     <ChartContainer>
-                        <header>
+                        <header style={{ display: 'flex', flexDirection: 'column' }}>
                             <Title title="Gastos" subtitle="Despesas por categoria no período" />
                             <ChartContent>
                                 <CategoriesPieChart />
@@ -92,7 +92,7 @@ export function Home() {
                         <Transaction id={1} amount={20000} date='09/09/2023' category={{ title: 'Alimentação', color: '#ff33bb' }} title='Mercado' />
                     </TransactionGroup>
                 </Aside>
-            </Main>
+            </Main >
         </>
     )
 }
