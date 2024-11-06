@@ -66,7 +66,8 @@ header{
 `
 export const ChartContent = styled.div`
 height: 15rem;
-width: 100%
+width: 100%;
+margin-top: 1rem;
 `
 
 export const ChartAction = styled.div`
