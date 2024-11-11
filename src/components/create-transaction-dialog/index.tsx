@@ -1,4 +1,4 @@
-import { Container, Content, CurrencyInput, InputGroup, RadioForm, RadioGroup } from "./styles";
+import { Container, Content, CurrencyInput, ErrorMessage, InputGroup, RadioForm, RadioGroup } from "./styles";
 import { Dialog } from "../dialog";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "../button";
@@ -49,7 +49,9 @@ export function CreateTransactionDialog() {
                                     <option key={item._id} value={item._id}>{item.title}</option>
                                 ))}
                             </select>
-                            {errors.categoryId && ()}
+                            {errors.categoryId && (
+                                <ErrorMessage></ErrorMessage>
+                            )}
                         </InputGroup>
                         <Input label="Nome" placeholder="Nome da Transação..." {...register('title')} />
                         <InputGroup>
