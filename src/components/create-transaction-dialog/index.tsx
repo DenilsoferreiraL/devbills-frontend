@@ -6,10 +6,22 @@ import { Title } from "../title";
 import { Input } from "../input";
 import { InputMask } from "@react-input/mask";
 import { useFetchAPI } from "../../hooks/useFetchAPI";
+import { CreateTransactionData } from "../../validators/types";
+import { useForm } from "react-hook-form";
+import dayjs from "dayjs";
 
 export function CreateTransactionDialog() {
     const { categories, fetchCategories } = useFetchAPI()
     const [open, setOpen] = useState(false)
+    const { register, reset, formState: { errors }, handleSubmit } = useForm<CreateTransactionData>({
+        defaultValues: {
+            categoryId: 'null',
+            title: '',
+            amount: '',
+            date: dayjs('2024-01-01').format('DD/MM/YYYY'),
+            type: 'income'
+        }
+    })
 
     useEffect(() => {
         fetchCategories()
@@ -31,14 +43,15 @@ export function CreateTransactionDialog() {
                     <Content>
                         <InputGroup>
                             <label >Categoria</label>
-                            <select>
+                            <select {...register('categoryId')}>
                                 <option value="null">Selecione uma categoria</option>
                                 {categories?.length && categories.map(item => (
                                     <option key={item._id} value={item._id}>{item.title}</option>
                                 ))}
                             </select>
+                            {errors.categoryId && ()}
                         </InputGroup>
-                        <Input label="Nome" placeholder="Nome da Transação..." />
+                        <Input label="Nome" placeholder="Nome da Transação..." {...register('title')} />
                         <InputGroup>
                             <label>Valor</label>
                             <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" />
