@@ -9,6 +9,8 @@ import { useFetchAPI } from "../../hooks/useFetchAPI";
 import { CreateTransactionData } from "../../validators/types";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createTransactionSchema } from "../../validators/schemas";
 
 export function CreateTransactionDialog() {
     const { categories, fetchCategories } = useFetchAPI()
@@ -20,7 +22,8 @@ export function CreateTransactionDialog() {
             amount: '',
             date: dayjs('2024-01-01').format('DD/MM/YYYY'),
             type: 'income'
-        }
+        },
+        resolver: zodResolver(createTransactionSchema)
     })
 
     useEffect(() => {
@@ -29,7 +32,7 @@ export function CreateTransactionDialog() {
 
     const handleClose = useCallback(() => {
         setOpen(false)
-    }, [])
+    }, [reset])
 
     const onSubmit = useCallback(() => {
         handleClose()
@@ -39,7 +42,7 @@ export function CreateTransactionDialog() {
         <Dialog open={open} onOpenChange={setOpen} trigger={<Button>Nova Transação</Button>}>
             <Container>
                 <Title title='Nova Transação' subtitle='Crie uma nova transação para seu controle financeiro' />
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Content>
                         <InputGroup>
                             <label >Categoria</label>
@@ -50,13 +53,16 @@ export function CreateTransactionDialog() {
                                 ))}
                             </select>
                             {errors.categoryId && (
-                                <ErrorMessage></ErrorMessage>
+                                <ErrorMessage>{errors.categoryId.message}</ErrorMessage>
                             )}
                         </InputGroup>
-                        <Input label="Nome" placeholder="Nome da Transação..." {...register('title')} />
+                        <Input label="Nome" placeholder="Nome da Transação..." {...register('title')} error={errors.title?.message} />
                         <InputGroup>
                             <label>Valor</label>
-                            <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" />
+                            <CurrencyInput placeholder="R$ 0,00" format="currency" currency="BRL" {...register('amount')} />
+                            {errors.amount && (
+                                <ErrorMessage>{errors.amount.message}</ErrorMessage>
+                            )}
                         </InputGroup>
                         <InputMask
                             component={Input}
@@ -65,22 +71,27 @@ export function CreateTransactionDialog() {
                             variant="black"
                             label="Data"
                             placeholder="dd/mm/aaaa"
+                            error={errors.date?.message}
+                            {...register('date')}
                         />
 
                         <RadioForm>
                             <RadioGroup>
-                                <input type="radio" id="income" value="income" name="type" />
+                                <input type="radio" id="income" value="income"  {...register('type')} />
                                 <label htmlFor="income"  >Receita</label>
                             </RadioGroup>
                             <RadioGroup>
-                                <input type="radio" id="expense" value="expense" name="type" />
+                                <input type="radio" id="expense" value="expense" {...register('type')} />
                                 <label htmlFor="expense" >Gasto</label>
                             </RadioGroup>
+                            {errors.type && (
+                                <ErrorMessage>{errors.type.message}</ErrorMessage>
+                            )}
                         </RadioForm>
                     </Content>
                     <footer>
                         <Button onClick={handleClose} variant="outline" type="button">Cancelar</Button>
-                        <Button onClick={onSubmit} type="button">Cadastrar</Button>
+                        <Button type="submit">Cadastrar</Button>
                     </footer>
                 </form>
             </Container>
