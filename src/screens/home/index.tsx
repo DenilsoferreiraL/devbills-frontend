@@ -49,6 +49,10 @@ export function Home() {
         transactionsFilterForm.setValue('categoryId', '')
     }, [transactionsFilterForm])
 
+    const onSubmitTransactions = useCallback(async (data: TransactionsFilterData) => {
+        await fetchTransactions(data)
+    }, [fetchTransactions])
+
     return (
         <>
             <Header>
@@ -83,7 +87,7 @@ export function Home() {
                                 error={transactionsFilterForm.formState.errors.endDate?.message}
                                 {...transactionsFilterForm.register('endDate')}
                             />
-                            <ButtonIcon />
+                            <ButtonIcon onClick={transactionsFilterForm.handleSubmit(onSubmitTransactions)} />
                         </InputGroup>
                     </Filters>
                     <Balance>
@@ -128,12 +132,25 @@ export function Home() {
                                 variant="black"
                                 placeholder="Procurar transações"
                             />
-                            <ButtonIcon />
+                            <ButtonIcon onClick={transactionsFilterForm.handleSubmit(onSubmitTransactions)} />
                         </SerachTransaction>
                     </header>
                     <TransactionGroup>
-                        <Transaction id={1} amount={20000} date='09/09/2023' category={{ title: 'Alimentação', color: '#ff33bb' }} title='Mercado' />
+                        {transactions?.length > 0 && (
+                            transactions.map((item, index) => (
+                                <Transaction
+                                    key={item._id}
+                                    id={index + 1}
+                                    amount={item.type === 'expense' ? item.amount * -1 : item.amount}
+                                    date={dayjs(item.date).add(3, 'hours').format('DD/MM/YYYY')}
+                                    category={{ title: item.category.title, color: item.category.color }}
+                                    title={item.title}
+                                    variant={item.type}
+                                />
+                            ))
+                        )}
                     </TransactionGroup>
+
                 </Aside>
             </Main >
         </>

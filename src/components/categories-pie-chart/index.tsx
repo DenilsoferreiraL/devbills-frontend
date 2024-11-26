@@ -24,6 +24,12 @@ const apiData = [
     },
 ];
 
+export type CategoryProps = {
+    id: string
+    title: string
+    color: string
+}
+
 type ChartData = {
     id: string;
     label: string;
@@ -32,7 +38,11 @@ type ChartData = {
     color: string;
 };
 
-export function CategoriesPieChart() {
+type CategoriesPieChartProps = {
+    onClick: (category: CategoryProps) => void
+}
+
+export function CategoriesPieChart({ onClick }: CategoriesPieChartProps) {
     const data = useMemo<ChartData[]>(() => {
         const chartData: ChartData[] = apiData.map((item) => ({
             id: item.title,
@@ -45,7 +55,13 @@ export function CategoriesPieChart() {
     }, []);
 
     return (
-        <ResponsivePie data={data}
+        <ResponsivePie
+            onClick={({ data }) => onClick({
+                id: data.externalId,
+                title: data.id,
+                color: data.color,
+            })}
+            data={data}
             enableArcLabels={false}
             enableArcLinkLabels={false}
             colors={({ data }) => data.color}
@@ -66,23 +82,20 @@ export function CategoriesPieChart() {
                     }
                 }
             }}
-            legends={[
-                {
-                    anchor: 'top',
-                    direction: 'row',
-                    justify: false,
-                    translateX: 0,
-                    translateY: -20,
-                    itemWidth: 120,
-                    itemHeight: 16,
-                    itemTextColor: theme.colors.neutral,
-                    itemDirection: 'left-to-right',
-                    itemOpacity: 1,
-                    symbolSize: 12,
-                    symbolShape: 'circle'
-                }
-            ]}
+            legends={[{
+                anchor: 'top',
+                direction: 'row',
+                justify: false,
+                translateX: 0,
+                translateY: -20,
+                itemWidth: 120,
+                itemHeight: 16,
+                itemTextColor: theme.colors.neutral,
+                itemDirection: 'left-to-right',
+                itemOpacity: 1,
+                symbolSize: 12,
+                symbolShape: 'circle'
+            }]}
         />
-    )
-
+    );
 }
