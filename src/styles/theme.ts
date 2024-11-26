@@ -1,15 +1,15 @@
 export const theme = {
     colors: {
-        primary: '#00ED64',
-        primaryDark: '#00684A',
-        success: '#00ED64',
-        info: '#016BF8',
-        warning: '#FFC010',
-        error: '#DB3030',
-        white: '#F9FBFA',
-        light: '#E8EDEB',
-        neutral: '#C1C7C6',
-        dark: '#001E2B',
-        black: '#04141C'
+        primary: '#00ed64',
+        primaryDark: '#2C6B2F',
+        success: '#00ed64',
+        info: '#2196F3',
+        warning: '#FF9800',
+        error: '#D32F2F',
+        white: '#FFFFFF',
+        light: '#F4F4F4',
+        neutral: '#BDBDBD',
+        dark: '#212121',
+        black: '#000000'
     }
-}
+};
