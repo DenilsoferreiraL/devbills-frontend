@@ -50,6 +50,8 @@ export function Home() {
                                 variant="dark"
                                 label="Início"
                                 placeholder="dd/mm/aaaa"
+                                error={transactionsFilterForm.formState.errors.beginDate?.message}
+                                {...transactionsFilterForm.register('beginDate')}
                             />
                             <InputMask
                                 component={Input}
@@ -58,6 +60,8 @@ export function Home() {
                                 variant="dark"
                                 label="Fim"
                                 placeholder="dd/mm/aaaa"
+                                error={transactionsFilterForm.formState.errors.endDate?.message}
+                                {...transactionsFilterForm.register('endDate')}
                             />
                             <ButtonIcon />
                         </InputGroup>
