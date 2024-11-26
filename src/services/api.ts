@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Category, CreateCategory, CreateTransaction, Transaction } from "./api-types";
+import { Category, CreateCategory, CreateTransaction, Transaction, TransactionsFilter } from "./api-types";
 
 export class APIService {
     private static client = axios.create({
@@ -7,7 +7,20 @@ export class APIService {
     })
 
     static async createTransaction(createTransactionData: CreateTransaction): Promise<Transaction> {
-        const { data } = await APIService.client.post('/transactions', createTransactionData)
+        const { data } = await APIService.client.post<Transaction>('/transactions', createTransactionData)
+
+        return data
+    }
+
+    static async getTransactions({ title, categoryId, beginDate, endDate }: TransactionsFilter): Promise<Transaction[]> {
+        const { data } = await APIService.client.get<Transaction[]>('/transactions', {
+            params: {
+                ...(title?.length && { title }),
+                ...(categoryId?.length && { categoryId }),
+                beginDate,
+                endDate
+            },
+        })
 
         return data
     }
