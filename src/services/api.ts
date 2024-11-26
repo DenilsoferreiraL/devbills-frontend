@@ -21,9 +21,9 @@ export class APIService {
 
     static async getCategories(): Promise<Category[]> {
 
-        const { data } = await APIService.client.post<Category>('/categories')
+        const { data } = await APIService.client.get<Category[]>('/categories')
 
-        return [data]
+        return data
     }
 
 }
