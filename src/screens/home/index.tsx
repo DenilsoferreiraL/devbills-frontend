@@ -8,13 +8,14 @@ import { Card } from "../../components/card";
 import { Transaction } from "../../components/transaction";
 import { CreateCategoryDialog } from "../../components/create-category-dialog";
 import { CreateTransactionDialog } from "../../components/create-transaction-dialog";
-import { CategoriesPieChart } from "../../components/categories-pie-chart";
+import { CategoriesPieChart, CategoryProps } from "../../components/categories-pie-chart";
 import { FinancialEvolutionBarChart } from "../../components/financial-evolution-bar-chart";
 import { TransactionsFilterData } from "../../validators/types";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionsFilterSchema } from "../../validators/schemas";
+import { useCallback, useState } from "react";
 
 
 export function Home() {
@@ -28,6 +29,18 @@ export function Home() {
         },
         resolver: zodResolver(transactionsFilterSchema)
     })
+
+    const [selectedCategory, setSelectedCategory] = useState<CategoryProps | null>(null)
+
+    const handleSelectCategory = useCallback(({ title, id, color }: CategoryProps) => {
+        setSelectedCategory({ title, id, color })
+        transactionsFilterForm.setValue('categoryId', id)
+    }, [transactionsFilterForm])
+
+    const handleDeselectCategory = useCallback(() => {
+        setSelectedCategory(null)
+        transactionsFilterForm.setValue('categoryId', '')
+    }, [transactionsFilterForm])
 
     return (
         <>
@@ -75,7 +88,7 @@ export function Home() {
                         <header style={{ display: 'flex', flexDirection: 'column' }}>
                             <Title title="Gastos" subtitle="Despesas por categoria no período" />
                             <ChartContent>
-                                <CategoriesPieChart />
+                                <CategoriesPieChart onClick={handleSelectCategory} />
                             </ChartContent>
                         </header>
                     </ChartContainer>
