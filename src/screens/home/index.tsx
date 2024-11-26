@@ -102,7 +102,7 @@ export function Home() {
                 </Section>
                 <Aside>
                     <header>
-                        <Title title="Transações" subtitle="Receitas e gastos no período" />
+                        <Title title="Transações" subtitle="Receitas e gastos no período" {...transactionsFilterForm.register('title')} />
                         <SerachTransaction>
                             <Input
                                 variant="black"
