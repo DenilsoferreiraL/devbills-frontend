@@ -42,14 +42,19 @@ export function Home() {
 
     const [selectedCategory, setSelectedCategory] = useState<CategoryProps | null>(null)
 
-    const handleSelectCategory = useCallback(({ title, id, color }: CategoryProps) => {
+    const handleSelectCategory = useCallback(async ({ title, id, color }: CategoryProps) => {
         setSelectedCategory({ title, id, color })
         transactionsFilterForm.setValue('categoryId', id)
-    }, [transactionsFilterForm])
+
+        await fetchTransactions(transactionsFilterForm.getValues())
+
+    }, [transactionsFilterForm, fetchTransactions])
 
     const handleDeselectCategory = useCallback(() => {
         setSelectedCategory(null)
         transactionsFilterForm.setValue('categoryId', '')
+
+
     }, [transactionsFilterForm])
 
     const onSubmitTransactions = useCallback(async (data: TransactionsFilterData) => {
