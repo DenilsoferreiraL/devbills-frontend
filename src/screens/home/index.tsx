@@ -15,7 +15,8 @@ import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionsFilterSchema } from "../../validators/schemas";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useFetchAPI } from "../../hooks/useFetchAPI";
 
 
 export function Home() {
@@ -29,6 +30,12 @@ export function Home() {
         },
         resolver: zodResolver(transactionsFilterSchema)
     })
+
+    const { transactions, fetchTransactions } = useFetchAPI()
+
+    useEffect(() => {
+        fetchTransactions(transactionsFilterForm.getValues())
+    }, [fetchTransactions, transactionsFilterForm])
 
     const [selectedCategory, setSelectedCategory] = useState<CategoryProps | null>(null)
 
