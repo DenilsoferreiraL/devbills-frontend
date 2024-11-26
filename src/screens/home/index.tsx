@@ -93,7 +93,7 @@ export function Home() {
                     <Balance>
                         <Card title="Saldo" amount={1000000} />
                         <Card title="Receitas" amount={1000000} variant="incomes" />
-                        <Card title="Gastos" amount={1000000} variant="expenses" />
+                        <Card title="Gastos" amount={1000000 * -1} variant="expenses" />
                     </Balance>
                     <ChartContainer>
                         <header style={{ display: 'flex', flexDirection: 'column' }}>
@@ -126,11 +126,12 @@ export function Home() {
                 </Section>
                 <Aside>
                     <header>
-                        <Title title="Transações" subtitle="Receitas e gastos no período" {...transactionsFilterForm.register('title')} />
+                        <Title title="Transações" subtitle="Receitas e gastos no período" />
                         <SerachTransaction>
                             <Input
                                 variant="black"
                                 placeholder="Procurar transações"
+                                {...transactionsFilterForm.register('title')}
                             />
                             <ButtonIcon onClick={transactionsFilterForm.handleSubmit(onSubmitTransactions)} />
                         </SerachTransaction>

@@ -56,8 +56,8 @@ export type Dashboard = {
 }
 
 export type DashboardFilters = {
-    benginDate?: string
-    endDate?: string
+    beginDate: string
+    endDate: string
 }
 
 
