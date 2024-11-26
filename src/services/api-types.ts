@@ -1,3 +1,5 @@
+import { Balance } from "../screens/home/styles"
+
 export type CreateCategory = {
     title: string
     color: string
@@ -32,4 +34,30 @@ export type Transaction = {
     date: Date
     category: Category
 }
+
+
+export type Balance = {
+    _id: string
+    incomes: number
+    expenses: number
+    balance: number
+}
+
+export type Expense = {
+    _id: string
+    title: string
+    amount: number
+    color: string
+}
+
+export type Dashboard = {
+    balance: Balance
+    expenses: Expense[]
+}
+
+export type DashboardFilters = {
+    benginDate?: string
+    endDate?: string
+}
+
 
