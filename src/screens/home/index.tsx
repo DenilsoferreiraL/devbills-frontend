@@ -2,7 +2,7 @@ import { InputMask } from "@react-input/mask";
 import { Input } from "../../components/input";
 import { Logo } from "../../components/logo";
 import { Title } from "../../components/title";
-import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SerachTransaction, TransactionGroup } from "./styles";
+import { Filters, Header, Main, Section, InputGroup, Balance, ChartContainer, ChartContent, ChartAction, Aside, SearchTransaction, TransactionGroup, CategoryBadge } from "./styles";
 import { ButtonIcon } from "../../components/button-icon";
 import { Card } from "../../components/card";
 import { Transaction } from "../../components/transaction";
@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionsFilterSchema } from "../../validators/schemas";
 import { useCallback, useEffect, useState } from "react";
 import { useFetchAPI } from "../../hooks/useFetchAPI";
+import { X } from "@phosphor-icons/react";
 
 
 export function Home() {
@@ -50,12 +51,13 @@ export function Home() {
 
     }, [transactionsFilterForm, fetchTransactions])
 
-    const handleDeselectCategory = useCallback(() => {
+    const handleDeselectCategory = useCallback(async () => {
         setSelectedCategory(null)
         transactionsFilterForm.setValue('categoryId', '')
 
+        await fetchTransactions(transactionsFilterForm.getValues())
 
-    }, [transactionsFilterForm])
+    }, [transactionsFilterForm, fetchTransactions])
 
     const onSubmitTransactions = useCallback(async (data: TransactionsFilterData) => {
         await fetchTransactions(data)
@@ -113,6 +115,14 @@ export function Home() {
                     <ChartContainer>
                         <header style={{ display: 'flex', flexDirection: 'column' }}>
                             <Title title="Gastos" subtitle="Despesas por categoria no período" />
+                            {selectedCategory && (
+                                <CategoryBadge
+                                    $color={selectedCategory.color}
+                                    onClick={handleDeselectCategory}>
+                                    <X />
+                                    {selectedCategory.title.toUpperCase()}
+                                </CategoryBadge>
+                            )}
                             <ChartContent>
                                 <CategoriesPieChart
 
@@ -144,14 +154,14 @@ export function Home() {
                 <Aside>
                     <header>
                         <Title title="Transações" subtitle="Receitas e gastos no período" />
-                        <SerachTransaction>
+                        <SearchTransaction>
                             <Input
                                 variant="black"
                                 placeholder="Procurar transações"
                                 {...transactionsFilterForm.register('title')}
                             />
                             <ButtonIcon onClick={transactionsFilterForm.handleSubmit(onSubmitTransactions)} />
-                        </SerachTransaction>
+                        </SearchTransaction>
                     </header>
                     <TransactionGroup>
                         {transactions?.length > 0 && (

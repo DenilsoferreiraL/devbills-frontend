@@ -97,7 +97,7 @@ header{
 }
 `
 
-export const SerachTransaction = styled.div`
+export const SearchTransaction = styled.div`
 display:flex;
 align-items: center;
 gap: 0.5rem;
