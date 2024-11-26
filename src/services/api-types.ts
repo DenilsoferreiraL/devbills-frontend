@@ -17,11 +17,19 @@ export type CreateTransaction = {
     date: string
 }
 
+export type TransactionsFilter = {
+    title?: string
+    categoryId?: string
+    beginDate: string
+    endDate: string
+}
+
 export type Transaction = {
     _id: string
     title: string
     amount: number
     type: 'income' | 'expense'
-    date: string
+    date: Date
     category: Category
 }
+
