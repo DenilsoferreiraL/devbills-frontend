@@ -10,9 +10,25 @@ import { CreateCategoryDialog } from "../../components/create-category-dialog";
 import { CreateTransactionDialog } from "../../components/create-transaction-dialog";
 import { CategoriesPieChart } from "../../components/categories-pie-chart";
 import { FinancialEvolutionBarChart } from "../../components/financial-evolution-bar-chart";
+import { TransactionsFilterData } from "../../validators/types";
+import { useForm } from "react-hook-form";
+import dayjs from "dayjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { transactionsFilterSchema } from "../../validators/schemas";
 
 
 export function Home() {
+
+    const transactionsFilterForm = useForm<TransactionsFilterData>({
+        defaultValues: {
+            title: '',
+            categoryId: '',
+            beginDate: dayjs().startOf('month').format('DD/MM/YYYY'),
+            endDate: dayjs().endOf('month').format('DD/MM/YYYY')
+        },
+        resolver: zodResolver(transactionsFilterSchema)
+    })
+
     return (
         <>
             <Header>
