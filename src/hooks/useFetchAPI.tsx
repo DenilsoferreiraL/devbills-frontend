@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useCallback, useContext, useState } from "react";
-import { Category, Dashboard, Transaction } from "../services/api-types";
-import { CreateCategoryData, CreateTransactionData, TransactionsFilterData } from "../validators/types";
+import { Category, Dashboard, FinancialEvolution, Transaction } from "../services/api-types";
+import { CreateCategoryData, CreateTransactionData, FinancialEvolutionFilterData, TransactionsFilterData } from "../validators/types";
 import { APIService } from "../services/api";
 import { formateDate } from "../utils/format-date";
 
@@ -10,6 +10,8 @@ interface FetchAPIProps {
     fetchCategories: () => Promise<void>
     fetchTransactions: (filters: TransactionsFilterData) => Promise<void>
     fetchDashboard: (filters: Pick<TransactionsFilterData, 'beginDate' | 'endDate'>) => Promise<void>
+    fetchFinancialEvolution: (filters: FinancialEvolutionFilterData) => Promise<void>
+    financialEvolution: FinancialEvolution[]
     dashboard: Dashboard
     categories: Category[]
     transactions: Transaction[]
@@ -25,6 +27,7 @@ export function FetchAPIProvider({ children }: FetchAPIProviderProps) {
     const [categories, setCategories] = useState<Category[]>([])
     const [transactions, setTransactions] = useState<Transaction[]>([])
     const [dashboard, setDashboard] = useState<Dashboard>({} as Dashboard)
+    const [financialEvolution, setFinancialEvolution] = useState<FinancialEvolution[]>([])
 
     const createTransaction = useCallback(async (data: CreateTransactionData) => {
         await APIService.createTransaction({
@@ -61,18 +64,28 @@ export function FetchAPIProvider({ children }: FetchAPIProviderProps) {
         setDashboard(dashboard)
     }, []);
 
+    const fetchFinancialEvolution = useCallback(async ({ year }: FinancialEvolutionFilterData) => {
+        const financialEvolution = await APIService.getFinancialEvolution({
+            year: year.padStart(4, '0')
+        })
+
+        setFinancialEvolution(financialEvolution)
+    }, []);
+
+
 
     return (
         <FetchAPIContext.Provider value={{
             categories,
             transactions,
             dashboard,
+            financialEvolution,
             fetchCategories,
             fetchTransactions,
             fetchDashboard,
             createCategory,
             createTransaction,
-
+            fetchFinancialEvolution
         }}>
             {children}
         </FetchAPIContext.Provider>
