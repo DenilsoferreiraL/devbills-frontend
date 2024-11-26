@@ -109,7 +109,9 @@ export function Home() {
                         <header style={{ display: 'flex', flexDirection: 'column' }}>
                             <Title title="Gastos" subtitle="Despesas por categoria no período" />
                             <ChartContent>
-                                <CategoriesPieChart onClick={handleSelectCategory} />
+                                <CategoriesPieChart
+
+                                    onClick={handleSelectCategory} />
                             </ChartContent>
                         </header>
                     </ChartContainer>
