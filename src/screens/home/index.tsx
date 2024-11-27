@@ -10,7 +10,7 @@ import { CreateCategoryDialog } from "../../components/create-category-dialog";
 import { CreateTransactionDialog } from "../../components/create-transaction-dialog";
 import { CategoriesPieChart, CategoryProps } from "../../components/categories-pie-chart";
 import { FinancialEvolutionBarChart } from "../../components/financial-evolution-bar-chart";
-import { TransactionsFilterData } from "../../validators/types";
+import { FinancialEvolutionFilterData, TransactionsFilterData } from "../../validators/types";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,14 +32,27 @@ export function Home() {
         resolver: zodResolver(transactionsFilterSchema)
     })
 
-    const { transactions, dashboard, fetchDashboard, fetchTransactions } = useFetchAPI()
+    const financialEvolutionFilterForm = useForm<FinancialEvolutionFilterData>({
+        defaultValues: {
+            year: dayjs().get('year').toString()
+        }
+    })
+
+    const {
+        transactions,
+        dashboard,
+        financialEvolution,
+        fetchDashboard,
+        fetchTransactions,
+        fetchFinancialEvolution } = useFetchAPI()
 
     useEffect(() => {
         const { beginDate, endDate } = transactionsFilterForm.getValues()
 
         fetchDashboard({ beginDate, endDate })
         fetchTransactions(transactionsFilterForm.getValues())
-    }, [fetchTransactions, transactionsFilterForm, fetchDashboard])
+        fetchFinancialEvolution(financialEvolutionFilterForm.getValues())
+    }, [fetchTransactions, transactionsFilterForm, fetchDashboard, fetchFinancialEvolution])
 
     const [selectedCategory, setSelectedCategory] = useState<CategoryProps | null>(null)
 
@@ -69,6 +82,10 @@ export function Home() {
         await fetchDashboard({ beginDate, endDate })
         await fetchTransactions(data)
     }, [fetchDashboard, fetchTransactions])
+
+    const onSubmitFinancialEvolution = useCallback(async (data: FinancialEvolutionFilterData) => {
+        await fetchFinancialEvolution(data)
+    }, [fetchFinancialEvolution])
 
     return (
         <>
@@ -142,12 +159,13 @@ export function Home() {
                                     variant="black"
                                     label="Ano"
                                     placeholder="aaaa"
+                                    {...financialEvolutionFilterForm.register('year')}
                                 />
-                                <ButtonIcon />
+                                <ButtonIcon onClick={financialEvolutionFilterForm.handleSubmit(onSubmitFinancialEvolution)} />
                             </ChartAction>
                         </header>
                         <ChartContent>
-                            <FinancialEvolutionBarChart />
+                            <FinancialEvolutionBarChart financialEvolution={financialEvolution} />
                         </ChartContent>
                     </ChartContainer>
                 </Section>
